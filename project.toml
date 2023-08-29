@@ -1,0 +1,7 @@
+[[build.env]]
+name='BP_MAVEN_ACTIVE_PROFILES'
+value='native'
+
+[[build.env]]
+name='BP_NATIVE_IMAGE_BUILD_ARGUMENTS'
+value='-g -H:ReflectionConfigurationFiles=classes/reflection.json'
