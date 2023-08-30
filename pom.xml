@@ -72,8 +72,8 @@
 <!--                            <buildpack>file:///C:/Users/Olga.Pavlova/IdeaProjects/ALL_GRAALVM/demo-spring/spring-graalvm-demo/native_images/java-native-image</buildpack>-->
 <!--                            <buildpack>file:///C:/Users/Olga.Pavlova/IdeaProjects/ALL_GRAALVM/demo-spring/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>-->
 <!--Linux -->
-<!--                            <buildpack>file:///Users/jetbrains/ideaprojects/spring-graalvm-demo/native_images/java-native-image</buildpack>-->
-<!--                            <buildpack>file:///Users/jetbrains/ideaprojects/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>-->
+<!--                            <buildpack>file:////home/jetbrains/IdeaProjects/spring-graalvm-demo/native_images/java-native-image</buildpack>-->
+<!--                            <buildpack>file:////home/jetbrains/IdeaProjects/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>-->
                         </buildpacks>
                     </image>
                 </configuration>
