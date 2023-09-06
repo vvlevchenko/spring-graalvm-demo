@@ -56,3 +56,7 @@ Currently spring native build based on buildpacks (perhaps plugin should be more
 10. `curl http://localhost:8080/users`  
 11. `http://localhost:8080/users`
 
+
+Troubleshooting
+https://youtrack.jetbrains.com/issue/IDEA-331760/ It is not possible to set breakpoints for some classes/methods
+...
