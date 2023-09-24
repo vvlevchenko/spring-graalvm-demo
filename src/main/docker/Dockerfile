@@ -1,4 +1,4 @@
-FROM docker.io/library/demo:0.0.1-SNAPSHOT as original
+FROM docker.io/library/spring-graalvm-demo:0.0.1-SNAPSHOT as original
 
 FROM ubuntu
 RUN apt-get update

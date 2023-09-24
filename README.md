@@ -1,7 +1,11 @@
 <h2>Run/debug the Spring application in native (no JVM) mode inside docker container</h2>
 Currently spring native build based on buildpacks (perhaps plugin should be more investigated)
 
-1. First `java-native-image` and `native-image-minamoto` should be downloaded and configured to be used in this demo 
+1. build packs:
+   - `cd native_images`
+   - `docker run -v $(pwd):/app golang:1.18  /app/scripts/build.sh`
+   - `sudo chown $USER:$USER -R bin`
+   - `mv bin native-image`
 2. Configure pom.xml
 ```pom.xml
 <plugin>
@@ -35,7 +39,7 @@ Currently spring native build based on buildpacks (perhaps plugin should be more
 3. Run `mvn spring-boot:build-image -Pnative -DskipTests` 
 4. Create a Dockerfile:
    ```Dockerfile
-   FROM docker.io/library/demo:0.0.1-SNAPSHOT as original
+   FROM docker.io/library/spring-graalvm-demo:0.0.1-SNAPSHOT as original
    
    FROM ubuntu
    RUN apt-get update
@@ -47,14 +51,12 @@ Currently spring native build based on buildpacks (perhaps plugin should be more
    COPY --from=original /workspace/* ./
    ```
 5. Build image from the Dockerfile (4)
-6. Extract binaries from image (5) including `.debug`, check if it executable (`chmod 755`) , copy them to target
-7. Create run configuration from GraalVM Native Image with target from the Dockerfile (4)
-    - Executable: binary from 6
+6. Create run configuration from GraalVM Native Image with target from the Dockerfile (4)
+    - Executable: in image '/workspace/com.example.demo.DemoApplication'
     - Use classpath of module: spring-graalvm-demo
-8. Press debug on this run configuration
-9. Set desired breakpoints ( in `com/example/demo/DemoApplication.java`)
-10. `curl http://localhost:8080/users`  
-11. `http://localhost:8080/users`
+7. Press debug on this run configuration
+8. Set desired breakpoints ( in `com/example/demo/DemoApplication.java`)
+9. `curl http://localhost:8080/users`
 
 
 Troubleshooting

@@ -51,6 +51,7 @@
                 <configuration>
                     <image>
                         <env>
+                            <BP_JVM_VERSION>17</BP_JVM_VERSION>
                             <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                 --no-fallback
                                 --verbose
@@ -66,8 +67,8 @@
                         </env>
                         <buildpacks>
 <!--MacOS-->
-                            <buildpack>file:///Users/jetbrains/Downloads/spring-graalvm-demo/native_images/java-native-image</buildpack>
-                            <buildpack>file:///Users/jetbrains/Downloads/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>
+                            <buildpack>file://${env.PWD}/native_images/java-native-image</buildpack>
+                            <buildpack>file://${env.PWD}/native_images/native-image-minamoto/native-image</buildpack>
 <!--WinOs -->
 <!--                            <buildpack>file:///C:/Users/Olga.Pavlova/IdeaProjects/ALL_GRAALVM/demo-spring/spring-graalvm-demo/native_images/java-native-image</buildpack>-->
 <!--                            <buildpack>file:///C:/Users/Olga.Pavlova/IdeaProjects/ALL_GRAALVM/demo-spring/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>-->
