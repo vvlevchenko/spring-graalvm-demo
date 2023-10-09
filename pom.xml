@@ -21,7 +21,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -44,41 +43,46 @@
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                    <metadataRepository>
+                        <enabled>true</enabled>
+                    </metadataRepository>
+                    <requiredVersion>17</requiredVersion>
+                    <imageName>springDemo</imageName>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <env>
-                            <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                --no-fallback
-                                --verbose
-                                -g
-                                -O0
-                                -H:-Inline
-                            </BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                            <BP_LOG_LEVEL>
-                                DEBUG
-                            </BP_LOG_LEVEL>
-                            <BP_BOM_LABEL_DISABLED>true</BP_BOM_LABEL_DISABLED>
-                            <!-- -H:ReflectionConfigurationFiles=reflection.json -->
-                        </env>
-                        <buildpacks>
-<!--MacOS-->
-                            <buildpack>file:///Users/jetbrains/Downloads/spring-graalvm-demo/native_images/java-native-image</buildpack>
-                            <buildpack>file:///Users/jetbrains/Downloads/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>
-<!--WinOs -->
-<!--                            <buildpack>file:///C:/Users/Olga.Pavlova/IdeaProjects/ALL_GRAALVM/demo-spring/spring-graalvm-demo/native_images/java-native-image</buildpack>-->
-<!--                            <buildpack>file:///C:/Users/Olga.Pavlova/IdeaProjects/ALL_GRAALVM/demo-spring/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>-->
-<!--Linux -->
-<!--                            <buildpack>file:////home/jetbrains/IdeaProjects/spring-graalvm-demo/native_images/java-native-image</buildpack>-->
-<!--                            <buildpack>file:////home/jetbrains/IdeaProjects/spring-graalvm-demo/native_images/native-image-minamoto</buildpack>-->
-                        </buildpacks>
-                    </image>
-                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <configuration>
+                            <debug>true</debug>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
